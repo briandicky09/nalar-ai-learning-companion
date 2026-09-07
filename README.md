@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nalar — AI Learning Companion (frontend)
 
-## Getting Started
+Nalar adalah antarmuka frontend berbasis Next.js (App Router) dan TypeScript untuk sebuah learning companion/landing site. Repo ini berisi aplikasi Next.js yang menampilkan UI dan komponen untuk proyek "Nalar" — logika backend/AI terpisah (jika ada) tidak termasuk di sini.
 
-First, run the development server:
+## Stack
+- Language(s): TypeScript, JavaScript, HTML, CSS
+- Framework / runtime: Next.js (App Router) + React 19
+- Notable libraries: framer-motion, lucide-react, clsx, tailwindcss
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Struktur penting
+```
+src/
+  app/
+    page.tsx        # Entry page / konten utama
+    layout.tsx      # Layout global
+    globals.css     # Styling global (Tailwind + custom)
+    favicon.ico
+  components/
+    Header.tsx
+    Sidebar.tsx
+    MobileNav.tsx
+    ui/             # komponen UI/hero/etc.
+  lib/
+    utils.ts        # utilitas kecil
+public/             # aset publik (gambar, favicon, dll)
+Referensi_Nalar/     # referensi dan materi terkait (non-UI)
+AGENTS.md            # file yang dihasilkan/ditambahkan oleh next dev
+package.json         # scripts & dependencies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Bagian utama aplikasi ada di `src/app/page.tsx` dan komponen UI di `src/components/`. Bila ingin mengubah tampilan utama, mulai dari `page.tsx` dan komponen di `src/components/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Menjalankan secara lokal
+1. Install dependency:
+```bash
+npm install
+# atau
+pnpm install
+# atau
+yarn
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Jalankan server dev:
+```bash
+npm run dev
+# atau
+pnpm dev
+# atau
+yarn dev
+```
 
-## Learn More
+3. Buka http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+Perintah lain:
+- Build produksi: `npm run build`
+- Jalankan production server: `npm run start`
+- Lint: `npm run lint`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Catatan teknis
+- Versi Next.js aktif di package.json; kode menggunakan App Router (struktur `src/app`).
+- Styling tampak memakai Tailwind (lihat `globals.css` dan dependensi `tailwindcss`).
+- Tidak ada variabel lingkungan kritis yang ditemukan di repo ini; jika ada backend/AI service, dokumentasikan endpoint/secret di file terpisah sebelum deploy.
+- `AGENTS.md` berisi blok yang dikelola otomatis oleh Next — jangan hapus bagian yang dihasilkan oleh `next dev` jika tidak ingin di-recreate.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contribution
+- Buat branch fitur/bug, ajukan PR dengan deskripsi singkat perubahan dan tangkapan layar bila UI berubah.
+- Sertakan testing manual langkah singkat pada PR untuk perubahan UI/UX.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+- Direkomendasikan: Vercel (otomatis untuk Next.js).
+- Pastikan variabel environment (jika ada backend/AI) diset pada dashboard deployment.
