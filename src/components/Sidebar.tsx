@@ -34,8 +34,24 @@ const navItems = [
 export function Sidebar() {
   const pathname = usePathname();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isSearchOpen, setSearchOpen] = useState(false);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
+    <>
     <aside
       className="hidden md:flex flex-col w-64 shrink-0"
       style={{
@@ -180,6 +196,7 @@ export function Sidebar() {
           fontSize: 12,
           color: "#787774",
         }}
+        onClick={() => setSearchOpen(true)}
         onMouseEnter={(e) => {
           e.currentTarget.style.background = "rgba(55,53,47,0.06)";
           e.currentTarget.style.color = "#191919";
@@ -320,7 +337,55 @@ export function Sidebar() {
           <span style={{ fontWeight: 500, color: "#191919" }}>● Tersinkron</span>
         </div>
       </div>
-    </aside>
+      </aside>
+
+      <AnimatePresence>
+        {isSearchOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-start justify-center pt-[15vh] px-4"
+            onClick={() => setSearchOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+              className="bg-white rounded-xl shadow-2xl w-full max-w-[600px] overflow-hidden flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center px-4 border-b border-[#E9E9E7]">
+                <Search size={20} className="text-[#9B9A97] shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Cari materi, kuis, atau pertanyaan..."
+                  className="flex-1 bg-transparent border-none outline-none px-3 py-4 text-[16px] text-[#191919] placeholder:text-[#9B9A97]"
+                  autoFocus
+                />
+                <kbd className="hidden sm:inline-block px-2 py-1 text-[10px] font-mono text-[#787774] bg-[#F7F6F3] rounded border border-[#E9E9E7]">
+                  ESC
+                </kbd>
+              </div>
+              <div className="p-2 min-h-[300px] bg-[#FBFBFA]">
+                <div className="px-3 py-2 text-xs font-semibold text-[#787774] uppercase tracking-wider">Pencarian Terakhir</div>
+                <div className="flex flex-col gap-1">
+                  <button className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white hover:shadow-sm text-left group">
+                    <FileText size={16} className="text-[#787774] group-hover:text-[#191919]" />
+                    <span className="text-[14px] text-[#191919]">Materi: Dasar-dasar Algoritma</span>
+                  </button>
+                  <button className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white hover:shadow-sm text-left group">
+                    <Bot size={16} className="text-[#787774] group-hover:text-[#191919]" />
+                    <span className="text-[14px] text-[#191919]">Chat: Perbedaan Class dan Struct</span>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 

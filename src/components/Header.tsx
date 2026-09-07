@@ -79,11 +79,20 @@ export function Header() {
               border: "none",
               cursor: "pointer",
             }}
+            onClick={() => {
+              const btn = document.getElementById('share-btn-text');
+              if (btn) {
+                btn.innerText = 'Disalin!';
+                setTimeout(() => {
+                  btn.innerText = 'Bagikan';
+                }, 2000);
+              }
+            }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "#F1F1EF")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
             <Share size={14} />
-            <span>Bagikan</span>
+            <span id="share-btn-text">Bagikan</span>
           </button>
         </div>
       </header>

@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { BrainCircuit, Search, Maximize, ZoomIn, ZoomOut, Link as LinkIcon, Lock } from "lucide-react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { BrainCircuit, Search, Maximize, ZoomIn, ZoomOut, Link as LinkIcon, Lock, X, PlayCircle, FileText, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function TopicMapPage() {
   const nodes = [
@@ -13,6 +13,8 @@ export default function TopicMapPage() {
     { id: 5, title: "Polimorfisme", status: "locked", x: 80, y: 55 },
     { id: 6, title: "Struktur Data Lanjut", status: "locked", x: 80, y: 85 },
   ];
+
+  const [selectedNode, setSelectedNode] = useState<typeof nodes[0] | null>(null);
 
   return (
     <div className="flex flex-col h-[calc(100vh-100px)] w-full">
@@ -76,7 +78,8 @@ export default function TopicMapPage() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.4, delay: node.id * 0.1 }}
               className="absolute group cursor-pointer"
-              style={{ left: `${node.x}%`, top: `${node.y}%`, transform: 'translate(-50%, -50%)' }}
+              style={{ left: `${node.x}%`, top: `${node.y}%`, transform: 'translate(-50%, -50%)', zIndex: selectedNode?.id === node.id ? 20 : 10 }}
+              onClick={() => setSelectedNode(node)}
             >
               <div className={`
                 flex items-center gap-3 px-5 py-3 rounded-xl border transition-all duration-300
@@ -110,6 +113,78 @@ export default function TopicMapPage() {
             </motion.div>
           ))}
         </div>
+        
+        {/* Side Panel for Node Details */}
+        <AnimatePresence>
+          {selectedNode && (
+            <motion.div
+              initial={{ x: 300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 300, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="absolute top-0 right-0 h-full w-80 bg-white border-l border-[#E9E9E7] shadow-2xl z-50 flex flex-col"
+            >
+              <div className="p-4 border-b border-[#E9E9E7] flex items-center justify-between">
+                <div>
+                  <div className="text-xs font-semibold text-[#787774] uppercase tracking-wider mb-1">Topik {selectedNode.id}</div>
+                  <h3 className="text-base font-bold text-[#191919]">{selectedNode.title}</h3>
+                </div>
+                <button 
+                  onClick={() => setSelectedNode(null)}
+                  className="p-1.5 hover:bg-[#F7F6F3] rounded-md text-[#9B9A97] transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="p-4 flex-1 overflow-y-auto">
+                <div className="mb-6">
+                  <div className="text-sm text-[#55534E] mb-3">
+                    Pelajari konsep {selectedNode.title.toLowerCase()} melalui materi dan video yang telah direkomendasikan AI.
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${
+                      selectedNode.status === 'completed' ? 'bg-[#D1FAE5] text-[#059669]' :
+                      selectedNode.status === 'current' ? 'bg-[#191919] text-white' :
+                      'bg-[#F1F1EF] text-[#9B9A97]'
+                    }`}>
+                      {selectedNode.status === 'completed' ? 'Selesai' : selectedNode.status === 'current' ? 'Sedang Dipelajari' : 'Terkunci'}
+                    </span>
+                  </div>
+                </div>
+                
+                <h4 className="text-sm font-semibold text-[#191919] mb-3">Materi Tersedia</h4>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-3 p-3 rounded-lg border border-[#E9E9E7] hover:bg-[#F7F6F3] cursor-pointer transition-colors">
+                    <div className="w-8 h-8 rounded bg-[#F1F1EF] flex items-center justify-center shrink-0 text-[#191919]">
+                      <FileText size={14} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium text-[#191919]">Rangkuman PDF</div>
+                      <div className="text-xs text-[#787774]">3 Halaman • 5 min baca</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg border border-[#E9E9E7] hover:bg-[#F7F6F3] cursor-pointer transition-colors">
+                    <div className="w-8 h-8 rounded bg-[#F1F1EF] flex items-center justify-center shrink-0 text-[#191919]">
+                      <PlayCircle size={14} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium text-[#191919]">Video Penjelasan</div>
+                      <div className="text-xs text-[#787774]">12 menit</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {selectedNode.status !== 'locked' && (
+                  <div className="mt-6">
+                    <button className="w-full py-2.5 bg-[#191919] text-white text-sm font-medium rounded-lg hover:bg-[#2C2C2C] transition-colors">
+                      Mulai Kuis Topik
+                    </button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

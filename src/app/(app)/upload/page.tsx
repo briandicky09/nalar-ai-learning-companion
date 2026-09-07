@@ -6,10 +6,18 @@ import { UploadCloud, FileText, CheckCircle2, FileUp, Loader2 } from "lucide-rea
 
 export default function UploadPage() {
   const [isDragging, setIsDragging] = useState(false);
-  const [uploadedFiles] = useState([
+  const [uploadedFiles, setUploadedFiles] = useState([
     { name: "Pertemuan_1_Pengantar_PBO.pdf", size: "2.4 MB", status: "Selesai", date: "2 jam yang lalu" },
     { name: "Pertemuan_2_Class_Object.pdf", size: "1.8 MB", status: "Memproses", date: "Baru saja" }
   ]);
+
+  const handleUpload = () => {
+    const newFile = { name: `Materi_Baru_${Math.floor(Math.random() * 1000)}.pdf`, size: "1.2 MB", status: "Memproses", date: "Baru saja" };
+    setUploadedFiles(prev => [newFile, ...prev]);
+    setTimeout(() => {
+      setUploadedFiles(prev => prev.map(f => f.name === newFile.name ? { ...f, status: "Selesai" } : f));
+    }, 3000);
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 800 }}>
@@ -25,9 +33,10 @@ export default function UploadPage() {
 
       {/* Upload Zone */}
       <div
+        onClick={handleUpload}
         onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
         onDragLeave={() => setIsDragging(false)}
-        onDrop={(e) => { e.preventDefault(); setIsDragging(false); }}
+        onDrop={(e) => { e.preventDefault(); setIsDragging(false); handleUpload(); }}
         style={{
           border: `2px dashed ${isDragging ? "#191919" : "#DFDFDE"}`,
           borderRadius: 16,
@@ -54,7 +63,7 @@ export default function UploadPage() {
         <p style={{ fontSize: 13, color: "#787774", margin: "0 0 24px", maxWidth: 300 }}>
           Sistem akan otomatis membaca isi materi dan memetakan struktur pembelajaran Anda.
         </p>
-        <button style={{
+        <button onClick={(e) => { e.stopPropagation(); handleUpload(); }} style={{
           padding: "10px 20px", borderRadius: 8, background: "#191919", color: "#FFF",
           border: "none", fontSize: 13, fontWeight: 500, cursor: "pointer", display: "flex", alignItems: "center", gap: 8
         }}>

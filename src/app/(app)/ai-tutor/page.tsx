@@ -5,11 +5,28 @@ import { motion } from "framer-motion";
 import { Send, Bot, User, Sparkles } from "lucide-react";
 
 export default function AITutorPage() {
-  const [messages] = useState([
+  const [messages, setMessages] = useState([
     { role: "ai", text: "Halo! Saya Nalar AI Tutor. Berdasarkan materi 'Pengantar PBO' yang kamu unggah, ada konsep yang masih membingungkan? Saya bisa bantu jelaskan konsep Class, Object, atau metode Sokratik untuk memancing pemahamanmu." },
     { role: "user", text: "Apa bedanya Class sama Object? Tolong pakai contoh yang gampang dong." },
     { role: "ai", text: "Tentu! Coba bayangkan **Class** itu seperti *cetak biru (blueprint)* atau cetakan kue. Sedangkan **Object** adalah kue hasil cetakannya.\n\nContoh:\n- **Class**: Mobil (punya rancangan roda, warna, mesin)\n- **Object**: Mobil Ferari merah milikmu, atau Mobil Avanza putih milik ayahmu.\n\nKeduanya dibuat dari konsep 'Mobil' yang sama, tapi wujud aslinya (Object) bisa berbeda-beda. Kira-kira dari contoh ini, bisakah kamu menebak kalau 'Kucing' itu Class atau Object?" }
   ]);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSend = () => {
+    if (!inputValue.trim()) return;
+    
+    const newUserMsg = { role: "user", text: inputValue };
+    setMessages((prev) => [...prev, newUserMsg]);
+    setInputValue("");
+    
+    // Simulate AI response
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        { role: "ai", text: "Bagus sekali pertanyaanmu! Mari kita bedah bersama berdasarkan prinsip Sokratik..." }
+      ]);
+    }, 1000);
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 48px)", maxWidth: 900, margin: "0 auto", width: "100%" }}>
@@ -52,6 +69,13 @@ export default function AITutorPage() {
       <div style={{ marginTop: 24, position: "relative" }}>
         <input
           type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSend();
+            }
+          }}
           placeholder="Tanya sesuatu atau jawab pertanyaan AI..."
           style={{
             width: "100%", padding: "16px 56px 16px 20px", borderRadius: 12,
@@ -59,11 +83,14 @@ export default function AITutorPage() {
             boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
           }}
         />
-        <button style={{
-          position: "absolute", right: 8, top: 8, bottom: 8, width: 40,
-          background: "#191919", borderRadius: 8, border: "none",
-          display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer"
-        }}>
+        <button 
+          onClick={handleSend}
+          style={{
+            position: "absolute", right: 8, top: 8, bottom: 8, width: 40,
+            background: "#191919", borderRadius: 8, border: "none",
+            display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer"
+          }}
+        >
           <Send size={16} color="#FFF" />
         </button>
       </div>

@@ -27,6 +27,8 @@ const fadeUp = {
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Typewriter effect state
   const words = ["cerdas", "cepat", "fokus", "terarah"];
@@ -74,23 +76,83 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative">
 
           <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-1 group">
+            <Link href="/" className="flex items-center group">
               <img src="/logo-nalar.png" alt="Nalar" className="w-28 h-28 object-contain transition-transform group-hover:scale-105 -my-8 -mx-2" />
-              <span className="font-bold text-xl tracking-tight text-[#191919]">Nalar</span>
             </Link>
           </div>
 
-          <nav className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
-            <button className="flex items-center gap-1 text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors">
-              Fitur <ChevronDown size={16} className="text-[#9B9A97]" />
-            </button>
-            <button className="flex items-center gap-1 text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors">
-              Panduan <ChevronDown size={16} className="text-[#9B9A97]" />
-            </button>
-            <Link href="/pricing" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors">
+          <nav className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2" onMouseLeave={() => setActiveDropdown(null)}>
+            <div className="relative" onMouseEnter={() => setActiveDropdown('fitur')}>
+              <button onClick={() => setActiveDropdown(activeDropdown === 'fitur' ? null : 'fitur')} className="flex items-center gap-1 text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
+                Fitur <ChevronDown size={16} className={`text-[#9B9A97] transition-transform duration-200 ${activeDropdown === 'fitur' ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {activeDropdown === 'fitur' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[340px] bg-white border border-[#E9E9E7] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-2"
+                  >
+                    <Link href="#extraction" onClick={() => setActiveDropdown(null)} className="flex items-start gap-3 p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors group/item">
+                      <div className="w-10 h-10 rounded-lg bg-[#F7F6F3] flex items-center justify-center text-[#191919] group-hover/item:bg-white group-hover/item:shadow-sm transition-all shrink-0">
+                        <FileText size={20} />
+                      </div>
+                      <div>
+                        <div className="text-[15px] font-semibold text-[#191919] mb-0.5">Ekstrak PDF</div>
+                        <div className="text-[13px] text-[#787774]">Otomatis ubah PDF jadi materi interaktif</div>
+                      </div>
+                    </Link>
+                    <Link href="#topic-map" onClick={() => setActiveDropdown(null)} className="flex items-start gap-3 p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors group/item">
+                      <div className="w-10 h-10 rounded-lg bg-[#F7F6F3] flex items-center justify-center text-[#191919] group-hover/item:bg-white group-hover/item:shadow-sm transition-all shrink-0">
+                        <Network size={20} />
+                      </div>
+                      <div>
+                        <div className="text-[15px] font-semibold text-[#191919] mb-0.5">Peta Konsep</div>
+                        <div className="text-[13px] text-[#787774]">Visualisasi hubungan antar topik</div>
+                      </div>
+                    </Link>
+                    <Link href="#exam-mode" onClick={() => setActiveDropdown(null)} className="flex items-start gap-3 p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors group/item">
+                      <div className="w-10 h-10 rounded-lg bg-[#F7F6F3] flex items-center justify-center text-[#191919] group-hover/item:bg-white group-hover/item:shadow-sm transition-all shrink-0">
+                        <BrainCircuit size={20} />
+                      </div>
+                      <div>
+                        <div className="text-[15px] font-semibold text-[#191919] mb-0.5">Ujian Adaptif</div>
+                        <div className="text-[13px] text-[#787774]">Simulasi ujian yang menyesuaikan kemampuan</div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <div className="relative" onMouseEnter={() => setActiveDropdown('panduan')}>
+              <button onClick={() => setActiveDropdown(activeDropdown === 'panduan' ? null : 'panduan')} className="flex items-center gap-1 text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
+                Panduan <ChevronDown size={16} className={`text-[#9B9A97] transition-transform duration-200 ${activeDropdown === 'panduan' ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {activeDropdown === 'panduan' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[220px] bg-white border border-[#E9E9E7] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-2"
+                  >
+                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Panduan Belajar</Link>
+                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Pusat Bantuan</Link>
+                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Akademi Nalar</Link>
+                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Komunitas</Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
+            <Link href="/pricing" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
               Harga
             </Link>
-            <Link href="/demo" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors">
+            <Link href="/demo" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
               Hubungi Kami
             </Link>
           </nav>
@@ -120,25 +182,26 @@ export default function LandingPage() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-0 z-40 bg-white pt-20 px-6 md:hidden"
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-0 z-40 bg-white pt-24 px-6 md:hidden"
           >
-            <div className="flex flex-col gap-2 text-[15px] font-medium text-[#191919]">
-              <Link href="#fitur" onClick={() => setMobileMenuOpen(false)} className="py-2.5 px-2 hover:bg-[#F7F6F3] rounded-lg">Fitur</Link>
-              <Link href="#panduan" onClick={() => setMobileMenuOpen(false)} className="py-2.5 px-2 hover:bg-[#F7F6F3] rounded-lg">Panduan</Link>
-              <Link href="#harga" onClick={() => setMobileMenuOpen(false)} className="py-2.5 px-2 hover:bg-[#F7F6F3] rounded-lg">Harga</Link>
-              <Link href="#demo" onClick={() => setMobileMenuOpen(false)} className="py-2.5 px-2 hover:bg-[#F7F6F3] rounded-lg">Hubungi Kami</Link>
+            <div className="flex flex-col gap-4 text-[16px] font-medium text-[#191919] mt-4">
+              <Link href="#fitur" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Fitur</Link>
+              <Link href="#panduan" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Panduan</Link>
+              <Link href="#harga" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Harga</Link>
+              <Link href="#demo" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Hubungi Kami</Link>
 
-              <div className="h-[1px] bg-[#E9E9E7] my-3 w-full" />
+              <div className="h-[1px] bg-[#E9E9E7] my-4 w-full" />
 
-              <div className="flex flex-col gap-3 px-2">
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="py-2 text-center text-[#787774] hover:text-[#191919]">Masuk ke Akun</Link>
+              <div className="flex flex-col gap-4 px-2">
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="py-3 text-center text-[#787774] hover:text-[#191919] transition-colors">Masuk ke Akun</Link>
                 <Link
                   href="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="inline-flex justify-center items-center w-full py-3 rounded-xl bg-[#191919] text-white font-medium shadow-sm hover:scale-[0.98] transition-transform"
+                  className="inline-flex justify-center items-center w-full py-3.5 rounded-xl bg-[#191919] text-white font-medium shadow-sm hover:scale-[0.98] transition-transform"
                 >
                   Mulai Gratis Sekarang
                 </Link>
@@ -520,14 +583,186 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* 1 & 2. Stats & Testimonial Section */}
+      <section className="py-24 px-6 w-full relative z-10 overflow-hidden">
+        <div className="max-w-6xl mx-auto text-center">
+        <p className="text-xs font-bold tracking-widest text-[#191919] uppercase mb-4">
+          Telah Dipercaya oleh Ratusan Ribu Pelajar
+        </p>
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#191919] mb-4">
+          Dampak Nyata Nalar bagi Mahasiswa
+        </h2>
+        <p className="text-[#787774] text-lg max-w-2xl mx-auto mb-16 leading-relaxed">
+          Lebih dari 650.000 pelajar dari berbagai kampus di Indonesia telah membuktikan efektivitas platform kami.
+        </p>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* Card 1 */}
+          <div className="bg-[#FBFBFA] border border-[#E9E9E7] rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#191919] mb-6">
+              <Users size={24} />
+            </div>
+            <div className="text-4xl font-bold text-[#191919] mb-2">650k+</div>
+            <div className="text-sm font-medium text-[#787774]">Pengguna Aktif</div>
+          </div>
+          {/* Card 2 */}
+          <div className="bg-[#FBFBFA] border border-[#E9E9E7] rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#191919] mb-6">
+              <FileText size={24} />
+            </div>
+            <div className="text-4xl font-bold text-[#191919] mb-2">1.5M+</div>
+            <div className="text-sm font-medium text-[#787774]">Catatan Dibuat</div>
+          </div>
+          {/* Card 3 */}
+          <div className="bg-[#FBFBFA] border border-[#E9E9E7] rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#191919] mb-6">
+              <Star size={24} />
+            </div>
+            <div className="text-4xl font-bold text-[#191919] mb-2">4.9/5</div>
+            <div className="text-sm font-medium text-[#787774]">Rating Pengguna</div>
+          </div>
+          {/* Card 4 */}
+          <div className="bg-[#FBFBFA] border border-[#E9E9E7] rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#191919] mb-6">
+              <BookOpen size={24} />
+            </div>
+            <div className="text-4xl font-bold text-[#191919] mb-2">1.0k+</div>
+            <div className="text-sm font-medium text-[#787774]">Sekolah & Kampus</div>
+          </div>
+        </div>
+        </div>
+
+        {/* Testimonials */}
+        <div className="max-w-6xl mx-auto mt-24">
+          <h3 className="text-2xl font-bold text-[#191919] mb-12 text-center">Apa Kata Mereka?</h3>
+          <div className="flex overflow-hidden relative w-full">
+            <div className="flex gap-6 w-max animate-[marquee_40s_linear_infinite] py-4">
+              {[...Array(2)].map((_, groupIndex) => (
+                <React.Fragment key={groupIndex}>
+                  {[
+                    { name: "Charlie Hernando", text: "Aplikasi yang bener-bener ngebantu, apalagi buat yang mau belajar dengan deadline H-1. Membuat materi panjang menjadi bagian inti yang bisa dipelajarin. Ada Quiz dan AI yang ngebantu buat yang masih belum paham soal materi." },
+                    { name: "Mayla Fazza", text: "Semenjak tau aplikasi ini, nilai aku semakin naik dan aku semakin aktif di kelas. Aplikasi ini punya banyak fitur yang sangat berguna buat pelajar, apalagi bisa diakses gratis. Pokoknya aku cinta banget sama aplikasi ini!" },
+                    { name: "Sajiwa Baswara", text: "AI-nya beneran ngebantu banget buat aku yang kuliah ini, apalagi ada kuis yang bikin aku makin paham. Next kalau ada rezeki lagi mau langganan yang 6 bulan buat semester 2!" },
+                    { name: "Rina Salsabila", text: "Fitur Peta Konsepnya sangat *game-changer*! Aku bisa melihat gambaran besar dari modul kuliah yang rumit jadi super jelas. Nalar beneran inovasi terbaik buat mahasiswa." }
+                  ].map((testimonial, i) => (
+                    <div key={i} className="w-[340px] md:w-[400px] shrink-0 bg-[#FBFBFA] border border-[#E9E9E7] p-8 rounded-2xl hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-shadow">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-12 h-12 rounded-full bg-[#191919] text-white flex items-center justify-center font-bold text-lg">
+                          {testimonial.name.charAt(0)}
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-[#191919]">{testimonial.name}</h4>
+                          <div className="flex text-[#191919] mt-1 gap-1">
+                            {[...Array(5)].map((_, idx) => <Star key={idx} size={14} fill="currentColor" />)}
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-[#55534E] leading-relaxed text-[15px]">
+                        "{testimonial.text}"
+                      </p>
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Comparison Table */}
+      <section className="py-24 px-6 border-t border-[#E9E9E7] bg-[#FBFBFA] relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#191919] mb-4">Kenapa Nalar?</h2>
+            <p className="text-[#787774] text-lg">Bandingin sama platform lain.</p>
+          </div>
+          
+          <div className="bg-white border border-[#E9E9E7] rounded-3xl overflow-hidden shadow-sm">
+            <div className="grid grid-cols-12 items-center p-6 border-b border-[#E9E9E7] bg-[#FBFBFA]">
+              <div className="col-span-6 md:col-span-8"></div>
+              <div className="col-span-3 md:col-span-2 text-center text-sm font-semibold text-[#787774]">Situs lain</div>
+              <div className="col-span-3 md:col-span-2 text-center text-sm font-bold text-[#191919]">Nalar</div>
+            </div>
+            
+            {[
+              "Ubah video YouTube & PDF jadi materi interaktif",
+              "Bahasa Indonesia native dengan konteks lokal",
+              "Peta Konsep + Kuis + Chat AI dalam satu tempat",
+              "Harga pelajar yang sangat terjangkau",
+              "Aplikasi mobile tersinkronisasi",
+              "Prediksi kelemahan & rekomendasi belajar otomatis"
+            ].map((feature, i) => (
+              <div key={i} className={`grid grid-cols-12 items-center p-6 ${i !== 5 ? 'border-b border-[#E9E9E7]' : ''} hover:bg-[#FBFBFA] transition-colors`}>
+                <div className="col-span-6 md:col-span-8 text-[15px] font-medium text-[#191919]">{feature}</div>
+                <div className="col-span-3 md:col-span-2 flex justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[#F1F1EF] flex items-center justify-center text-[#9B9A97]">
+                    <X size={16} strokeWidth={3} />
+                  </div>
+                </div>
+                <div className="col-span-3 md:col-span-2 flex justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[#191919] flex items-center justify-center text-white shadow-sm">
+                    <CheckCircle2 size={16} strokeWidth={3} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. FAQ Section */}
+      <section className="py-24 px-6 border-t border-[#E9E9E7] bg-white relative z-10">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-[#191919] mb-4">Pertanyaan Umum</h2>
+            <p className="text-[#787774] text-lg">Hal-hal yang sering ditanyakan pengguna baru</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              { q: "Apa itu Nalar?", a: "Nalar adalah asisten belajar berbasis AI yang dapat mengubah materi kuliah (PDF, PPT, Word) menjadi ringkasan, peta konsep, dan kuis interaktif secara otomatis." },
+              { q: "Format file apa saja yang didukung?", a: "Saat ini Nalar mendukung format PDF, DOCX (Word), PPTX (PowerPoint), dan TXT. Kami juga segera menghadirkan fitur konversi tautan YouTube." },
+              { q: "Apakah gratis?", a: "Ya, Nalar memiliki paket gratis (Basic) yang bisa langsung Anda gunakan. Untuk fitur lanjutan seperti kuota dokumen lebih banyak dan prioritas AI, kami menyediakan paket Premium dengan harga terjangkau." },
+              { q: "Berapa lama proses ekstrak catatan?", a: "Tergantung ukuran file Anda. Biasanya hanya membutuhkan waktu kurang dari 30 detik untuk menghasilkan Peta Konsep dan bahan Kuis." },
+              { q: "Apakah ini termasuk kecurangan akademik?", a: "Tidak. Nalar tidak membuatkan esai atau tugas untuk Anda. Nalar dirancang menggunakan metode Sokratik untuk membantu Anda *memahami* materi kuliah dengan cara menguji pemahaman Anda, bukan memberi contekan." },
+              { q: "Apakah data saya aman?", a: "Sangat aman. Dokumen yang Anda unggah hanya digunakan untuk memproses sesi belajar Anda dan tidak digunakan untuk melatih model AI publik secara terbuka. Anda dapat menghapus dokumen kapan saja." }
+            ].map((faq, i) => (
+              <div key={i} className="border border-[#E9E9E7] rounded-2xl overflow-hidden bg-[#FBFBFA] hover:border-[#DFDFDE] transition-colors">
+                <button 
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)} 
+                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                >
+                  <span className="font-semibold text-[#191919] text-[15px]">{faq.q}</span>
+                  <ChevronDown size={18} className={`text-[#9B9A97] transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {openFaq === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="p-6 pt-0 text-[#787774] text-[15px] leading-relaxed border-t border-[#E9E9E7]/50">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-[#E9E9E7] bg-white pt-16 pb-8 px-6 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row justify-between gap-12 lg:gap-8 mb-16">
           {/* Logo & Quote */}
           <div className="lg:max-w-xs">
-            <Link href="/" className="flex items-center gap-1 group mb-8">
-              <img src="/logo-nalar.png" alt="Nalar" className="w-28 h-28 object-contain -my-8 -mx-2" />
-              <span className="font-bold text-xl tracking-tight text-[#191919]">Nalar</span>
+            <Link href="/" className="flex items-center group mb-8">
+              <img src="/logo-nalar.png" alt="Nalar" className="w-28 h-28 object-contain -my-8 -ml-2 -mr-6" />
+              <span className="font-bold text-xl tracking-tight text-[#191919] mt-3">Nalar</span>
             </Link>
             <p className="text-[#191919] font-serif italic text-lg leading-relaxed mb-4">
               "We shape our tools,<br />

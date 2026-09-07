@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react";
 
 export default function QuizPage() {
-  const [state, setState] = useState<"setup" | "result">("setup");
+  const [state, setState] = useState<"setup" | "playing" | "result">("setup");
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 800 }}>
@@ -35,13 +36,69 @@ export default function QuizPage() {
             </div>
             <div style={{ marginTop: 24, display: "flex", justifyContent: "flex-end" }}>
               <button 
-                onClick={() => setState("result")}
+                onClick={() => setState("playing")}
                 style={{
                   padding: "12px 24px", borderRadius: 8, background: "#191919", color: "#FFF",
                   border: "none", fontSize: 14, fontWeight: 500, cursor: "pointer", display: "flex", alignItems: "center", gap: 8
                 }}
               >
                 Mulai Kuis Sekarang <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {state === "playing" && (
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 14, fontWeight: 500, color: "#787774" }}>Soal 1 dari 10</span>
+            <span style={{ fontSize: 14, fontWeight: 500, color: "#191919", background: "#F7F6F3", padding: "4px 12px", borderRadius: 999 }}>Waktu: 14:59</span>
+          </div>
+          
+          <div style={{ padding: 32, borderRadius: 16, border: "1px solid #E9E9E7", background: "#FFFFFF", display: "flex", flexDirection: "column", gap: 24 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 600, color: "#191919", margin: 0, lineHeight: 1.5 }}>
+              Di antara pilihan berikut, manakah yang paling tepat mendeskripsikan perbedaan antara Class dan Object dalam PBO?
+            </h2>
+            
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {[
+                "Class adalah instance dari Object",
+                "Class adalah blueprint, sedangkan Object adalah wujud nyata dari Class",
+                "Class dan Object adalah hal yang persis sama",
+                "Object hanya bisa digunakan untuk menyimpan tipe data primitif"
+              ].map((opt, idx) => (
+                <label 
+                  key={idx}
+                  style={{ 
+                    display: "flex", alignItems: "flex-start", gap: 12, padding: 16, 
+                    borderRadius: 12, border: `1px solid ${selectedAnswer === idx ? "#191919" : "#DFDFDE"}`, 
+                    background: selectedAnswer === idx ? "#FBFBFA" : "#FFFFFF", cursor: "pointer", transition: "all 0.2s" 
+                  }}
+                >
+                  <input 
+                    type="radio" 
+                    name="answer" 
+                    checked={selectedAnswer === idx}
+                    onChange={() => setSelectedAnswer(idx)}
+                    style={{ accentColor: "#191919", marginTop: 4 }} 
+                  />
+                  <span style={{ fontSize: 14, color: "#191919", lineHeight: 1.5 }}>{opt}</span>
+                </label>
+              ))}
+            </div>
+            
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 8 }}>
+              <button 
+                onClick={() => setState("result")}
+                disabled={selectedAnswer === null}
+                style={{
+                  padding: "12px 24px", borderRadius: 8, background: selectedAnswer === null ? "#DFDFDE" : "#191919", 
+                  color: selectedAnswer === null ? "#9B9A97" : "#FFF", border: "none", fontSize: 14, fontWeight: 500, 
+                  cursor: selectedAnswer === null ? "not-allowed" : "pointer", transition: "background 0.2s"
+                }}
+              >
+                Selanjutnya
               </button>
             </div>
           </div>
