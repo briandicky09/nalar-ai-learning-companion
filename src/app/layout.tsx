@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${jakarta.variable} antialiased`}>
+    <html lang="id" className={`${jakarta.variable} antialiased scroll-smooth`}>
       <body className="bg-[#FFFFFF] text-[#2F3437] font-sans min-h-screen">
         {children}
       </body>

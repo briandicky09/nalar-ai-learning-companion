@@ -140,19 +140,19 @@ export default function LandingPage() {
                     transition={{ duration: 0.2 }}
                     className="absolute top-full left-1/2 -translate-x-1/2 w-[220px] bg-white border border-[#E9E9E7] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-2"
                   >
-                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Panduan Belajar</Link>
-                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Pusat Bantuan</Link>
-                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Akademi Nalar</Link>
-                    <Link href="#" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Komunitas</Link>
+                    <Link href="/dashboard" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Panduan Belajar</Link>
+                    <Link href="/dashboard" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Pusat Bantuan</Link>
+                    <Link href="/dashboard" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Akademi Nalar</Link>
+                    <Link href="/dashboard" onClick={() => setActiveDropdown(null)} className="block p-3 hover:bg-[#F7F6F3] rounded-lg transition-colors text-[15px] font-medium text-[#191919]">Komunitas</Link>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
             
-            <Link href="/pricing" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
+            <Link href="/dashboard" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
               Harga
             </Link>
-            <Link href="/demo" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
+            <Link href="/dashboard" className="text-[15px] font-medium text-[#191919] hover:text-[#787774] transition-colors py-4">
               Hubungi Kami
             </Link>
           </nav>
@@ -191,8 +191,8 @@ export default function LandingPage() {
             <div className="flex flex-col gap-4 text-[16px] font-medium text-[#191919] mt-4">
               <Link href="#fitur" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Fitur</Link>
               <Link href="#panduan" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Panduan</Link>
-              <Link href="#harga" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Harga</Link>
-              <Link href="#demo" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Hubungi Kami</Link>
+              <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Harga</Link>
+              <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="py-3 px-4 hover:bg-[#F7F6F3] rounded-xl transition-colors">Hubungi Kami</Link>
 
               <div className="h-[1px] bg-[#E9E9E7] my-4 w-full" />
 
@@ -265,7 +265,7 @@ export default function LandingPage() {
             Mulai belajar sekarang <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
-            href="#demo"
+            href="/dashboard"
             className="w-full sm:w-auto px-8 py-3.5 rounded-[6px] bg-white border border-[#E9E9E7] text-[#191919] text-[16px] font-semibold hover:bg-[#FBFBFA] transition-all shadow-sm active:scale-95 flex items-center justify-center"
           >
             Lihat Demo
@@ -361,7 +361,7 @@ export default function LandingPage() {
       </section>
 
       {/* Variation Section: Cara Kerja Nalar (Reference Style) */}
-      <section className="py-32 px-6 max-w-6xl mx-auto bg-white relative z-10">
+      <section id="extraction" className="py-32 px-6 max-w-6xl mx-auto bg-white relative z-10">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -406,7 +406,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Step 2 */}
-          <motion.div variants={fadeUp} className="bg-white border border-[#E9E9E7] rounded-3xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-shadow duration-300 flex flex-col h-full group">
+          <motion.div id="topic-map" variants={fadeUp} className="bg-white border border-[#E9E9E7] rounded-3xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-shadow duration-300 flex flex-col h-full group">
             <div className="w-10 h-10 rounded-xl bg-[#FBFBFA] border border-[#E9E9E7] text-[#191919] flex items-center justify-center mb-8 text-lg font-bold">2</div>
 
             <div className="mb-8 w-full aspect-[4/3] relative rounded-xl overflow-hidden bg-[#FBFBFA] flex items-center justify-center">
@@ -424,7 +424,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Step 3 */}
-          <motion.div variants={fadeUp} className="bg-white border border-[#E9E9E7] rounded-3xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-shadow duration-300 flex flex-col h-full group">
+          <motion.div id="exam-mode" variants={fadeUp} className="bg-white border border-[#E9E9E7] rounded-3xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-shadow duration-300 flex flex-col h-full group">
             <div className="w-10 h-10 rounded-xl bg-[#FBFBFA] border border-[#E9E9E7] text-[#191919] flex items-center justify-center mb-8 text-lg font-bold">3</div>
 
             <div className="mb-8 w-full aspect-[4/3] relative rounded-xl overflow-hidden bg-[#FBFBFA] flex items-center justify-center">
@@ -448,7 +448,7 @@ export default function LandingPage() {
       </section>
 
       {/* Large Features - AI where your team works style */}
-      <section className="py-24 px-6 max-w-6xl mx-auto relative z-10">
+      <section id="fitur" className="py-24 px-6 max-w-6xl mx-auto relative z-10">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Large Card 1 */}
           <motion.div
@@ -559,7 +559,7 @@ export default function LandingPage() {
               </h4>
             </Link>
 
-            <Link href="#progress" className="p-6 rounded-xl border border-[#E9E9E7] bg-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-[#191919] transition-all group flex flex-col min-h-[160px]">
+            <Link href="/dashboard" className="p-6 rounded-xl border border-[#E9E9E7] bg-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-[#191919] transition-all group flex flex-col min-h-[160px]">
               <div className="w-10 h-10 rounded-full border border-[#E9E9E7] flex items-center justify-center text-[#191919] mb-6">
                 <LineChart size={18} />
               </div>
@@ -711,7 +711,7 @@ export default function LandingPage() {
       </section>
 
       {/* 4. FAQ Section */}
-      <section className="py-24 px-6 border-t border-[#E9E9E7] bg-white relative z-10">
+      <section id="panduan" className="py-24 px-6 border-t border-[#E9E9E7] bg-white relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-[#191919] mb-4">Pertanyaan Umum</h2>
@@ -776,38 +776,38 @@ export default function LandingPage() {
             <div>
               <h4 className="font-bold text-[#191919] mb-4">Produk</h4>
               <ul className="space-y-3 text-sm text-[#787774]">
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Fitur Utama</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Apa yang Baru</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Nalar AI Tutor</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Harga</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Minta Demo</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Fitur Utama</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Apa yang Baru</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Nalar AI Tutor</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Harga</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Minta Demo</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-[#191919] mb-4">Sumber Daya</h4>
               <ul className="space-y-3 text-sm text-[#787774]">
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Panduan Belajar</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Pusat Bantuan</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Akademi</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Komunitas</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Panduan Belajar</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Pusat Bantuan</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Akademi</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Komunitas</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-[#191919] mb-4">Perusahaan</h4>
               <ul className="space-y-3 text-sm text-[#787774]">
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Tentang Kami</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Karier</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Keamanan</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Status</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Tentang Kami</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Karier</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Keamanan</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Status</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-[#191919] mb-4">Nalar untuk</h4>
               <ul className="space-y-3 text-sm text-[#787774]">
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Mahasiswa IT</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Fakultas Kedokteran</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">Fakultas Hukum</Link></li>
-                <li><Link href="#" className="hover:text-[#191919] transition-colors">BEM & Organisasi</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Mahasiswa IT</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Fakultas Kedokteran</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">Fakultas Hukum</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#191919] transition-colors">BEM & Organisasi</Link></li>
               </ul>
             </div>
           </div>
@@ -817,8 +817,8 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto pt-8 border-t border-[#E9E9E7] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#787774]">
           <div className="flex items-center gap-6">
             <span>© 2026 Nalar Labs, Inc.</span>
-            <Link href="#" className="hover:text-[#191919] font-medium">Pengaturan Cookie</Link>
-            <Link href="#" className="hover:text-[#191919] font-medium">Syarat & Privasi</Link>
+            <Link href="/dashboard" className="hover:text-[#191919] font-medium">Pengaturan Cookie</Link>
+            <Link href="/dashboard" className="hover:text-[#191919] font-medium">Syarat & Privasi</Link>
           </div>
           <button className="flex items-center gap-2 px-3 py-1.5 rounded-md border border-[#E9E9E7] hover:bg-[#FBFBFA] text-[#191919] font-medium transition-colors bg-white">
             <Globe size={14} /> Bahasa Indonesia (ID) <ChevronDown size={14} />
