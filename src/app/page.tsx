@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight, ChevronDown, Globe, FileText, Target,
   BrainCircuit, Users, ShieldCheck, LineChart,
@@ -24,14 +23,13 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
 };
 
+const words = ["cerdas", "cepat", "fokus", "terarah"];
+
 export default function LandingPage() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  // Typewriter effect state
-  const words = ["cerdas", "cepat", "fokus", "terarah"];
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -658,7 +656,7 @@ export default function LandingPage() {
                         </div>
                       </div>
                       <p className="text-[#55534E] leading-relaxed text-[15px]">
-                        "{testimonial.text}"
+                        &ldquo;{testimonial.text}&rdquo;
                       </p>
                     </div>
                   ))}
@@ -765,8 +763,8 @@ export default function LandingPage() {
               <span className="font-bold text-xl tracking-tight text-[#191919] mt-3">Nalar</span>
             </Link>
             <p className="text-[#191919] font-serif italic text-lg leading-relaxed mb-4">
-              "We shape our tools,<br />
-              and thereafter our tools shape us."
+              &ldquo;We shape our tools,<br />
+              and thereafter our tools shape us.&rdquo;
             </p>
             <p className="text-[#787774] text-sm">Marshall McLuhan</p>
           </div>
