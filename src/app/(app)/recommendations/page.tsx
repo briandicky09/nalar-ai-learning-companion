@@ -95,12 +95,12 @@ export default function RecommendationsPage() {
             className="group bg-white border border-[#E9E9E7] rounded-xl p-8 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-300 relative"
           >
             <div className="flex flex-col sm:flex-row items-start gap-6">
-              
+
               {/* Neutral Icon Container */}
               <div className="shrink-0 w-12 h-12 rounded-lg bg-[#FBFBFA] border border-[#E9E9E7] text-[#191919] flex items-center justify-center shadow-sm">
                 <rec.icon size={20} strokeWidth={2} />
               </div>
-              
+
               {/* Content Container */}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-3 mb-3">
@@ -111,18 +111,18 @@ export default function RecommendationsPage() {
                     <Target size={12} /> {rec.score}
                   </span>
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-[#191919] mb-3 truncate">
                   {rec.title}
                 </h3>
-                
+
                 <p className="text-[15px] text-[#55534E] leading-relaxed mb-6">
                   {rec.desc}
                 </p>
 
                 {/* Action Button */}
                 <div className="flex items-center justify-end">
-                  <Link 
+                  <Link
                     href={rec.link}
                     className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-[#E9E9E7] hover:bg-[#FBFBFA] text-[#191919] text-sm font-medium rounded-lg transition-colors active:scale-95 shadow-sm"
                   >

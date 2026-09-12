@@ -134,8 +134,8 @@ export default function UploadPage() {
           cursor: "pointer"
         }}
       >
-        <div style={{ 
-          width: 64, height: 64, borderRadius: "50%", background: "#F7F6F3", 
+        <div style={{
+          width: 64, height: 64, borderRadius: "50%", background: "#F7F6F3",
           display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16
         }}>
           {isUploading ? (
@@ -166,7 +166,7 @@ export default function UploadPage() {
       {/* File List */}
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <h2 style={{ fontSize: 16, fontWeight: 600, color: "#191919", margin: 0 }}>Riwayat Unggahan</h2>
-        
+
         {materials.length === 0 ? (
           <div style={{ padding: 24, textAlign: "center", color: "#787774", fontSize: 13, background: "#FBFBFA", borderRadius: 12, border: "1px solid #E9E9E7" }}>
             Belum ada materi yang diunggah. Unggah file PDF pertama kamu di atas.

@@ -117,7 +117,7 @@ export default function QuizPage() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ padding: 24, borderRadius: 16, border: "1px solid #E9E9E7", background: "#FBFBFA" }}>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: "#191919", margin: "0 0 16px" }}>Pilih Materi untuk Dievaluasi</h3>
-            
+
             {materials.length === 0 ? (
               <div style={{ padding: 16, textAlign: "center", color: "#787774", fontSize: 14, background: "#FFF", borderRadius: 8, border: "1px solid #DFDFDE" }}>
                 Memuat daftar materi kuliah...
@@ -125,21 +125,21 @@ export default function QuizPage() {
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {materials.map((mat) => (
-                  <label 
+                  <label
                     key={mat.id}
                     onClick={() => setSelectedMaterialId(mat.id)}
-                    style={{ 
-                      display: "flex", alignItems: "center", gap: 12, padding: 16, borderRadius: 8, 
-                      border: `1px solid ${selectedMaterialId === mat.id ? "#191919" : "#DFDFDE"}`, 
-                      background: selectedMaterialId === mat.id ? "#FBFBFA" : "#FFFFFF", cursor: "pointer" 
+                    style={{
+                      display: "flex", alignItems: "center", gap: 12, padding: 16, borderRadius: 8,
+                      border: `1px solid ${selectedMaterialId === mat.id ? "#191919" : "#DFDFDE"}`,
+                      background: selectedMaterialId === mat.id ? "#FBFBFA" : "#FFFFFF", cursor: "pointer"
                     }}
                   >
-                    <input 
-                      type="radio" 
-                      name="materi" 
+                    <input
+                      type="radio"
+                      name="materi"
                       checked={selectedMaterialId === mat.id}
                       onChange={() => setSelectedMaterialId(mat.id)}
-                      style={{ accentColor: "#191919" }} 
+                      style={{ accentColor: "#191919" }}
                     />
                     <div>
                       <span style={{ fontSize: 14, fontWeight: 500, color: "#191919" }}>{mat.title}</span>
@@ -153,7 +153,7 @@ export default function QuizPage() {
             )}
 
             <div style={{ marginTop: 24, display: "flex", justifyContent: "flex-end" }}>
-              <button 
+              <button
                 onClick={handleStartQuiz}
                 disabled={isLoading || !selectedMaterialId}
                 style={{
@@ -187,28 +187,28 @@ export default function QuizPage() {
               Nalar Evaluasi Adaptif
             </span>
           </div>
-          
+
           <div style={{ padding: 32, borderRadius: 16, border: "1px solid #E9E9E7", background: "#FFFFFF", display: "flex", flexDirection: "column", gap: 24 }}>
             <h2 style={{ fontSize: 18, fontWeight: 600, color: "#191919", margin: 0, lineHeight: 1.5 }}>
               {currentQ.question}
             </h2>
-            
+
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {options.map((opt, idx) => (
-                <label 
+                <label
                   key={idx}
-                  style={{ 
-                    display: "flex", alignItems: "flex-start", gap: 12, padding: 16, 
-                    borderRadius: 12, border: `1px solid ${selectedAnswerIdx === idx ? "#191919" : "#DFDFDE"}`, 
-                    background: selectedAnswerIdx === idx ? "#FBFBFA" : "#FFFFFF", cursor: "pointer", transition: "all 0.2s" 
+                  style={{
+                    display: "flex", alignItems: "flex-start", gap: 12, padding: 16,
+                    borderRadius: 12, border: `1px solid ${selectedAnswerIdx === idx ? "#191919" : "#DFDFDE"}`,
+                    background: selectedAnswerIdx === idx ? "#FBFBFA" : "#FFFFFF", cursor: "pointer", transition: "all 0.2s"
                   }}
                 >
-                  <input 
-                    type="radio" 
-                    name="answer" 
+                  <input
+                    type="radio"
+                    name="answer"
                     checked={selectedAnswerIdx === idx}
                     onChange={() => setSelectedAnswerIdx(idx)}
-                    style={{ accentColor: "#191919", marginTop: 4 }} 
+                    style={{ accentColor: "#191919", marginTop: 4 }}
                   />
                   <span style={{ fontSize: 14, color: "#191919", lineHeight: 1.5 }}>
                     <strong>{optionLetters[idx]}.</strong> {opt}
@@ -216,14 +216,14 @@ export default function QuizPage() {
                 </label>
               ))}
             </div>
-            
+
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 8 }}>
-              <button 
+              <button
                 onClick={handleNextOrSubmit}
                 disabled={selectedAnswerIdx === null || isLoading}
                 style={{
-                  padding: "12px 24px", borderRadius: 8, background: selectedAnswerIdx === null ? "#DFDFDE" : "#191919", 
-                  color: selectedAnswerIdx === null ? "#9B9A97" : "#FFF", border: "none", fontSize: 14, fontWeight: 500, 
+                  padding: "12px 24px", borderRadius: 8, background: selectedAnswerIdx === null ? "#DFDFDE" : "#191919",
+                  color: selectedAnswerIdx === null ? "#9B9A97" : "#FFF", border: "none", fontSize: 14, fontWeight: 500,
                   cursor: selectedAnswerIdx === null || isLoading ? "not-allowed" : "pointer", transition: "background 0.2s",
                   display: "flex", alignItems: "center", gap: 8
                 }}
@@ -296,7 +296,7 @@ export default function QuizPage() {
           </div>
 
           <div style={{ display: "flex", justifyContent: "flex-end", gap: 16, marginTop: 16 }}>
-            <button 
+            <button
               onClick={() => {
                 setState("setup");
                 setSelectedAnswerIdx(null);
@@ -305,7 +305,7 @@ export default function QuizPage() {
             >
               Ulangi Kuis
             </button>
-            <Link 
+            <Link
               href="/recommendations"
               style={{
                 padding: "10px 20px", borderRadius: 8, background: "#191919", color: "#FFF", textDecoration: "none",

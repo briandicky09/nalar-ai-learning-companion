@@ -183,7 +183,7 @@ export default function AITutorPage() {
             boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
           }}
         />
-        <button 
+        <button
           onClick={handleSend}
           disabled={isLoading || !inputValue.trim()}
           style={{

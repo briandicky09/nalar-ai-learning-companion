@@ -24,7 +24,7 @@ export default function ExamPage() {
       </div>
 
       {examState === "intro" && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex-1 flex flex-col items-center justify-center text-center px-6"
@@ -32,11 +32,11 @@ export default function ExamPage() {
           <div className="w-20 h-20 bg-[#FBFBFA] border border-[#E9E9E7] rounded-2xl flex items-center justify-center text-[#191919] mb-8 shadow-sm">
             <FileText size={32} strokeWidth={1.5} />
           </div>
-          
+
           <h1 className="text-3xl font-bold text-[#191919] mb-4">
             Ujian Akhir Modul
           </h1>
-          
+
           <p className="text-[#787774] text-[15px] max-w-md leading-relaxed mb-8">
             Ujian ini akan mengukur pemahaman komprehensif Anda tentang materi yang telah dipelajari. Terdiri dari soal esai dan pilihan ganda.
           </p>
@@ -53,7 +53,7 @@ export default function ExamPage() {
             </div>
           </div>
 
-          <button 
+          <button
             onClick={() => setExamState("playing")}
             className="inline-flex items-center justify-center px-8 py-3.5 bg-[#191919] text-white font-medium rounded-lg hover:bg-[#2F3437] transition-all active:scale-95 shadow-sm text-lg"
           >
@@ -74,7 +74,7 @@ export default function ExamPage() {
               Jelaskan konsep Polymorphism dalam Pemrograman Berorientasi Objek beserta contoh kasus nyata implementasinya dalam aplikasi e-commerce!
             </p>
 
-            <textarea 
+            <textarea
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               placeholder="Tuliskan jawaban Anda di sini..."
@@ -86,7 +86,7 @@ export default function ExamPage() {
             <button className="px-6 py-2.5 border border-[#DFDFDE] text-[#55534E] font-medium rounded-lg hover:bg-[#FBFBFA] transition-colors">
               Sebelumnya
             </button>
-            <button 
+            <button
               onClick={() => setExamState("finished")}
               className="px-6 py-2.5 bg-[#191919] text-white font-medium rounded-lg hover:bg-[#2F3437] transition-colors"
             >
@@ -101,16 +101,16 @@ export default function ExamPage() {
           <div className="w-24 h-24 bg-[#D1FAE5] rounded-full flex items-center justify-center text-[#059669] mb-8 shadow-sm">
             <CheckCircle2 size={48} strokeWidth={1.5} />
           </div>
-          
+
           <h2 className="text-3xl font-bold text-[#191919] mb-4">
             Ujian Selesai!
           </h2>
-          
+
           <p className="text-[#787774] text-base max-w-md leading-relaxed mb-8">
             Jawaban Anda telah berhasil dikirim. AI Nalar sedang mengevaluasi jawaban esai Anda dan hasilnya akan segera tersedia.
           </p>
 
-          <Link 
+          <Link
             href="/dashboard"
             className="inline-flex items-center justify-center px-8 py-3.5 border-2 border-[#191919] text-[#191919] font-medium rounded-lg hover:bg-[#FBFBFA] transition-all active:scale-95"
           >

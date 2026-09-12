@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "backend": "php backend/artisan serve",
+    "backend:migrate": "php backend/artisan migrate:fresh --seed",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
